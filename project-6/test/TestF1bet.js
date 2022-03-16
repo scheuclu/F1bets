@@ -84,11 +84,51 @@ contract('F1Bet', async (accounts) => {
 
 
     it("Place bet", async () => {
-        await f1bet.placeBet();
+
+        let valid_result_arr1 = [
+            ["VER", "1"], ["PER", "2"], ["HAM", "3"], ["RUS", "4"], ["SAI", "5"],
+            ["LEC", "6"], ["VET", "7"], ["STR", "8"], ["GAS", "9"], ["TSU", "10"],
+            ["ALO", "11"],["OCO", "12"],["RIC", "13"],["NOR", "14"],["BOT", "15"],
+            ["ZHO", "16"],["LAT", "17"],["ALB", "18"],["MSC", "19"],["MZP", "20"]
+        ]
+        let valid_result_arr2 = [
+            ["VER", "1"], ["PER", "2"], ["HAM", "3"], ["RUS", "4"], ["SAI", "5"],
+            ["LEC", "6"], ["VET", "7"], ["STR", "8"], ["GAS", "9"], ["TSU", "10"],
+            ["ALO", "11"],["OCO", "12"],["RIC", "13"],["NOR", "14"],["BOT", "15"],
+            ["ZHO", "16"],["LAT", "DNF"],["ALB", "17"],["MSC", "18"],["MZP", "19"]
+        ]
+        let invalid_result_arr1 = [
+            ["VER", "1"], ["PER", "2"], ["HAM", "3"], ["RUS", "4"], ["SAI", "5"],
+            ["LEC", "6"], ["VET", "7"], ["STR", "8"], ["GAS", "9"], ["TSU", "10"],
+            ["ALO", "11"],["OCO", "12"],["RIC", "13"],["NOR", "14"],["BOT", "15"],
+            ["ZHO", "16"],["LAT", "1"],["ALB", "18"],["MSC", "19"],["MZP", "20"]
+        ]
+
+
+        await f1bet.placeBet(valid_result_arr1, {from: account_0, value: 5});
         let result = await f1bet.getPlayerBet(account_0);
-        console.log("account_0 bets:", result);
         let result1 = await f1bet.getPlayerBet(account_1);
-        console.log("account_1 bets:", result1);
+        assert.equal(result.submitted, true, "Result should be submitted.");
+        assert.equal(result1.submitted, false, "Result should not be submitted.");
+        assert.equal(result.value, 5, "Result value should.");
+        assert.equal(result.from, account_0, "Result from should be sender address.");
+        for(let i=0; i<20; i++){
+            assert.equal(result.sBets[i].player, valid_result_arr1[i][0], "TODO");
+            assert.equal(result.sBets[i].position, valid_result_arr1[i][1], "TODO");
+        }
+
+        await f1bet.placeBet(valid_result_arr2, {from: account_1, value: 7});
+        result = await f1bet.getPlayerBet(account_0);
+        result1 = await f1bet.getPlayerBet(account_1);
+        assert.equal(result.submitted, true, "Result should be submitted.");
+        assert.equal(result1.submitted, true, "Result should not be submitted.");
+        assert.equal(result1.value, 7, "Result value should.");
+        assert.equal(result1.from, account_1, "Result from should be sender address.");
+        for(let i=0; i<20; i++){
+            assert.equal(result1.sBets[i].player, valid_result_arr2[i][0], "TODO");
+            assert.equal(result1.sBets[i].position, valid_result_arr2[i][1], "TODO");
+        }
+
     })
 
     it("Submit solution", async () => {

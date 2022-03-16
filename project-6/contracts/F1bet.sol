@@ -94,50 +94,16 @@ contract F1bet {
         return _nextRace;
     }
 
-    function placeBet() public payable {
-        SingleBet memory b = SingleBet({player: "HAM", position: "1"});
+    function placeBet(string[2][20] memory sBets) public payable {
 
-        // SingleBet[20] memory sBets=[
-        //     b,b,b,b,b,b,b,b,b,b,
-        //     b,b,b,b,b,b,b,b,b,b
-        // ];
-
-
-        
-        
-        // RaceBet memory  rb = RaceBet({
-        //                 from: msg.sender,
-        //                 value: msg.value,
-        //                 sBets: sBets});
-        // ytemp = rb;
         _openRaceBets[msg.sender].from = msg.sender;
         _openRaceBets[msg.sender].value = msg.value;
         _openRaceBets[msg.sender].submitted = true;
 
-        for(uint i=0; i<20; i++){
-            _openRaceBets[msg.sender].sBets[i] = b;
+        for(uint i=0; i<sBets.length; i++){
+            _openRaceBets[msg.sender].sBets[i].player = sBets[i][0];
+            _openRaceBets[msg.sender].sBets[i].position = sBets[i][1];
         }
-        _openRaceBets[msg.sender].sBets[0] = SingleBet({player: "HAM", position: "1"});
-        _openRaceBets[msg.sender].sBets[1] = SingleBet({player: "RUS", position: "2"});
-        _openRaceBets[msg.sender].sBets[2] = SingleBet({player: "PER", position: "3"});
-        _openRaceBets[msg.sender].sBets[3] = SingleBet({player: "VER", position: "4"});
-        _openRaceBets[msg.sender].sBets[4] = SingleBet({player: "LEC", position: "5"});
-        _openRaceBets[msg.sender].sBets[5] = SingleBet({player: "SAI", position: "6"});
-        _openRaceBets[msg.sender].sBets[6] = SingleBet({player: "RIC", position: "7"});
-        _openRaceBets[msg.sender].sBets[7] = SingleBet({player: "NOR", position: "8"});
-        _openRaceBets[msg.sender].sBets[8] = SingleBet({player: "GAS", position: "9"});
-        _openRaceBets[msg.sender].sBets[9] = SingleBet({player: "TSU", position: "10"});
-        _openRaceBets[msg.sender].sBets[10] = SingleBet({player: "ALO", position: "11"});
-        _openRaceBets[msg.sender].sBets[11] = SingleBet({player: "OCO", position: "12"});
-        _openRaceBets[msg.sender].sBets[12] = SingleBet({player: "BOT", position: "13"});
-        _openRaceBets[msg.sender].sBets[13] = SingleBet({player: "ZHO", position: "14"});
-        _openRaceBets[msg.sender].sBets[14] = SingleBet({player: "LAT", position: "15"});
-        _openRaceBets[msg.sender].sBets[15] = SingleBet({player: "ALB", position: "16"});
-        _openRaceBets[msg.sender].sBets[16] = SingleBet({player: "MSC", position: "17"});
-        _openRaceBets[msg.sender].sBets[17] = SingleBet({player: "MZP", position: "18"});
-        _openRaceBets[msg.sender].sBets[18] = SingleBet({player: "VET", position: "19"});
-        _openRaceBets[msg.sender].sBets[19] = SingleBet({player: "STR", position: "20"});
-        
         
     }
 
