@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fair Trade Eggs</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+
+<body onload="javascript:CreateDriverSection()">
+
+
+
+    <div class="container">
+        <!-- <h1 style="text-align: center;">F1 armchair experts</h1> -->
+        <img src="img/logo.svg" class="center"/>
+        <br>
+        <br>
+    </div>
+
+    <div class="tab">
+        <button class="tablinks" onclick="openCity(event, 'ProductOverview')">Home</button>
+        <button class="tablinks" onclick="openCity(event, 'FarmDetails')">Standings</button>
+        <button class="tablinks" onclick="openCity(event, 'ProductDetails')">Product Details</button>
+        <button class="tablinks" onclick="openCity(event, 'TODO')", id="defaultOpen">TODO</button>
+    </div>
+
+    <!-- first tab -->
+    <div id="TODO" class="tabcontent">
+
+        <div class="rt-container">
+            <div class="col-rt-12">
+                <div class="Scriptcontent">
+
+                    <!-- Message Box HTML -->
+                    <div class="Click-here">Click Me please</div>
+                    <div class="custom-model-main">
+                        <div class="custom-model-inner">
+                            <div class="close-btn">×</div>
+                            <div class="custom-model-wrap">
+                                <div class="pop-up-content-wrap">
+                                    <h2>Have a nice day!</h2>
+                                    <p>This is message box popup that revealed on button click.</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="bg-overlay"></div>
+                    </div>
+                    <!-- End Message Box HTML -->
+
+                </div>
+            </div>
+        </div>
+
+
+        <h3>The next race is Monaco</h3>
+
+
+
+        <div id="AAA" class="row"> 
+        </div> 
+
+        <br>
+        <hr>
+        <div class="row">
+            <div class="column">
+                <input class="input-field" type="text" id="sku" name="bet_amount" value=1>
+            </div>
+            <div class="column">
+                <button class="btn-bet" id="button" type="button" data-id="btn_place_bet">Place Bet</button>
+            </div>
+            <div class="column">
+                <button class="btn-bet" id="button" type="button" data-id="5555">Get Wallet Balance</button>
+            </div>
+        </div>
+
+    </div>
+
+
+
+    <!-- first tab -->
+    <div id="ProductOverview" class="tabcontent">
+        <!-- <div class="form-group">
+            SKU
+            <br>
+            <input class="input-field" type="number" id="sku" name="sku" value=1><br>
+            UPC
+            <br>
+            <input type="number" id="upc" name="upc" value=1><br>
+            Current Owner ID
+            <br>
+            <input type="text" id="ownerID" name="ownerID" value="0x963865f57804b38459dd4b2da2f760211a200438" size="50"><br>
+            <div class=button-div>
+                <button class="btn-fetchOne" id="button" type="button" data-id="9">Fetch Data 1</button>
+                <button class="btn-fetchTwo" id="button" type="button" data-id="10">Fetch Data 2</button>
+            </div>
+        </div> -->
+    </div>
+    <!-- second tab -->
+    <div id="FarmDetails" class="tabcontent">
+        <!-- <div class="form-group">
+            Farmer ID
+            <br>
+            <input type="text" id="originFarmerID" name="originFarmerID" value="0x99c289eb2aacec289631a5ddf62cf27a63d4494f"
+                size="50"><br>
+            Farm Name
+            <br>
+            <input type="text" id="originFarmName" name="originFarmName" value="John Doe"><br>
+            Farm Information
+            <br>
+            <input type="text" id="originFarmInformation" name="originFarmInformation" value="Yarra Valley"><br>
+            Farm Latitude
+            <br>
+            <input type="text" id="originFarmLatitude" name="originFarmLatitude" value="-38.239770"><br>
+            Farm Longitude
+            <br>
+            <input type="text" id="originFarmLongitude" name="originFarmLongitude" value="144.341490"><br>
+            <br>
+            <button class="btn-harvest" id="button" type="button" data-id="1">Harvest</button>
+            <button class="btn-process" id="button" type="button" data-id="2">Process</button>
+            <button class="btn-pack" id="button" type="button" data-id="3">Pack</button>
+            <button class="btn-forsale" id="button" type="button" data-id="4">ForSale</button>
+        </div> -->
+    </div>
+    <!-- third tab -->
+    <div id="ProductDetails" class="tabcontent">
+        <div class="form-group">
+            Product Notes
+            <br>
+            <input type="text" id="productNotes" name="productNotes" value="Best beans for Espresso" size="60"><br>
+            Product Price
+            <br>
+            <input type="number" id="productPrice" name="productPrice" value=1>ETH<br>
+            Distributor ID
+            <br>
+            <input type="text" id="distributorID" name="distributorID" value="0xf1b1bcd24dad92303dd9fe78be639f7bcf9c238d"
+                size="50">
+            <br>
+            Retailer ID
+            <br>
+            <input type="text" id="retailerID" name="retailerID" value="0x0fb2bfefd526966c87efa19f6693d50971763fc2"
+                size="50"><br>
+            Distributor ID
+            <br>
+            <input type="text" id="consumerID" name="consumerID" value="0x5d777e9127b28fb119e81a6304278a0a21bef1c4"
+                size="50"><br>
+            <br>
+            <button class="btn-buy" id="button" type="button" data-id="5">Buy</button>
+            <button class="btn-ship" id="button" type="button" data-id="6">Ship</button>
+            <button class="btn-receive" id="button" type="button" data-id="7">Receive</button>
+            <button class="btn-purchase" id="button" type="button" data-id="8">Purchase</button>
+        </div>
+    </div>
+
+
+    <h2>Transaction History<span id="ftc-history"></span></h2>
+    <div>
+        <ul id="ftc-events">
+            <!-- Events will appear here from app.js -->
+        </ul>
+        <br>
+        <hr>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="js/web3.min.js"></script>
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+
+    <script>
+    function openCity(evt, cityName) {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+      
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+        }
+      
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+      
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(cityName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+
+    </script>
+    <script>
+        document.getElementById("defaultOpen").click();
+    </script>
+
+    <!-- todo -->
+    <!-- <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script>
+        $(".btn-bet").on('click', function () {
+            $(".custom-model-main").addClass('model-open');
+        });
+        $(".close-btn, .bg-overlay").click(function () {
+            $(".custom-model-main").removeClass('model-open');
+        });
+    </script> -->
+
+
+</body>
+
+</html>

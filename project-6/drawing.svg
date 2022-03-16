@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="23.331587mm"
+   height="13.997727mm"
+   viewBox="0 0 23.331586 13.997728"
+   version="1.1"
+   id="svg5"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="drawing.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview7"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="0.51669473"
+     inkscape:cx="162.57182"
+     inkscape:cy="101.60739"
+     inkscape:window-width="1440"
+     inkscape:window-height="803"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="layer1" />
+  <defs
+     id="defs2">
+    <rect
+       x="73.544395"
+       y="98.704315"
+       width="290.30682"
+       height="160.63644"
+       id="rect1684" />
+  </defs>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-9.8060442,-6.2811399)">
+    <text
+       xml:space="preserve"
+       transform="scale(0.26458333)"
+       id="text1682"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:133.333px;line-height:1.25;font-family:'.Damascus PUA';-inkscape-font-specification:'.Damascus PUA Italic';white-space:pre;shape-inside:url(#rect1684);fill:#000000;fill-opacity:1;stroke:none"><tspan
+         x="73.544922"
+         y="380.98358"
+         id="tspan35166"><tspan
+           dx="0 76.562302"
+           id="tspan35164">F1</tspan></tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2025px;line-height:1.25;font-family:Georgia;-inkscape-font-specification:'Georgia Bold Italic';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.151518"
+       x="10.348592"
+       y="20.278868"
+       id="text16628"><tspan
+         sodipodi:role="line"
+         id="tspan16626"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:20.2025px;font-family:Georgia;-inkscape-font-specification:'Georgia Bold Italic';fill:#ffffff;stroke:#000000;stroke-width:0.151518"
+         x="10.348592"
+         y="20.278868">F1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.04049px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.151518"
+       x="18.958792"
+       y="18.797066"
+       id="text24190"
+       transform="rotate(-16.148547)"><tspan
+         sodipodi:role="line"
+         id="tspan24188"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.04049px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.151518"
+         x="18.958792"
+         y="18.797066">armchair</tspan><tspan
+         sodipodi:role="line"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:4.04049px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold';text-align:center;text-anchor:middle;stroke-width:0.151518"
+         x="18.958792"
+         y="23.847679"
+         id="tspan24192">experts</tspan></text>
+  </g>
+</svg>

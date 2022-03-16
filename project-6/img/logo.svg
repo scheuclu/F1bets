@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="76.729164mm"
+   height="10.637748mm"
+   viewBox="0 0 76.729164 10.637748"
+   version="1.1"
+   id="svg35171"
+   inkscape:version="1.1 (c4e8f9e, 2021-05-24)"
+   sodipodi:docname="logo.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview35173"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:document-units="mm"
+     showgrid="false"
+     inkscape:zoom="2"
+     inkscape:cx="39.25"
+     inkscape:cy="7"
+     inkscape:window-width="1440"
+     inkscape:window-height="802"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer1"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0" />
+  <defs
+     id="defs35168" />
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-8.7312499,-104.29554)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:10.5833px;line-height:1.25;font-family:sans-serif;fill:#ff1801;fill-opacity:1;stroke:#38383f;stroke-width:0.264583;stroke-opacity:1"
+       x="9.2172413"
+       y="112.1431"
+       id="text35850"><tspan
+         sodipodi:role="line"
+         id="tspan35848"
+         style="font-style:italic;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:sans-serif;-inkscape-font-specification:'sans-serif Bold Italic';fill:#ff1801;fill-opacity:1;stroke:#38383f;stroke-width:0.264583;stroke-opacity:1"
+         x="9.2172413"
+         y="112.1431">F1</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;line-height:1.25;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';fill:#38383f;fill-opacity:1;stroke:none;stroke-width:0.264583"
+       x="24.870832"
+       y="111.65417"
+       id="text47822"><tspan
+         sodipodi:role="line"
+         id="tspan47820"
+         style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:7.05556px;font-family:sans-serif;-inkscape-font-specification:'sans-serif Italic';fill:#38383f;fill-opacity:1;stroke-width:0.264583"
+         x="24.870832"
+         y="111.65417">armchair experts</tspan></text>
+    <path
+       style="fill:none;stroke:#ff1801;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 8.7312499,113.50625 H 85.460415"
+       id="path48420" />
+    <path
+       style="fill:none;stroke:#38383f;stroke-width:0.477352;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="M 11.656012,114.69461 H 81.109136"
+       id="path48420-6" />
+  </g>
+</svg>
