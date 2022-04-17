@@ -25,6 +25,24 @@ contract('F1Bet', async (accounts) => {
         f1bet = await F1Bet.new({ from: account_0 });
     });
 
+    it("Contract balance is being tracked", async () => {
+        const f1bet2 = await F1Bet.new({ from: account_0 })
+        let balance = await f1bet2.getBalance();
+        console.log("balance", balance);
+
+        let valid_result_arr1 = [
+            ["VER", "1"], ["PER", "2"], ["HAM", "3"], ["RUS", "4"], ["SAI", "5"],
+            ["LEC", "6"], ["VET", "7"], ["STR", "8"], ["GAS", "9"], ["TSU", "10"],
+            ["ALO", "11"],["OCO", "12"],["RIC", "13"],["NOR", "14"],["BOT", "15"],
+            ["ZHO", "16"],["LAT", "17"],["ALB", "18"],["MSC", "19"],["MZP", "20"]
+        ];
+        
+        await f1bet.placeBet(valid_result_arr1, {from: account_0, value: 10000000000000000000});
+        balance = await f1bet2.getBalance();
+        console.log("balance", balance);
+
+    })
+
 
     it("Owner can add player, but others can't", async () => {
         const f1bet = await F1Bet.new({ from: account_0 })
@@ -106,32 +124,63 @@ contract('F1Bet', async (accounts) => {
 
 
         await f1bet.placeBet(valid_result_arr1, {from: account_0, value: 5});
-        let result = await f1bet.getPlayerBet(account_0);
-        let result1 = await f1bet.getPlayerBet(account_1);
-        assert.equal(result.submitted, true, "Result should be submitted.");
-        assert.equal(result1.submitted, false, "Result should not be submitted.");
-        assert.equal(result.value, 5, "Result value should.");
-        assert.equal(result.from, account_0, "Result from should be sender address.");
-        for(let i=0; i<20; i++){
-            assert.equal(result.sBets[i].player, valid_result_arr1[i][0], "TODO");
-            assert.equal(result.sBets[i].position, valid_result_arr1[i][1], "TODO");
-        }
+        let result = await f1bet.getPlayerBets(account_0);
+        expect(
+            result.map( (a)=>a[0]+a[1] )).to.have.members(
+            valid_result_arr1.map( (a)=>a[0]+a[1] )
+        );
 
         await f1bet.placeBet(valid_result_arr2, {from: account_1, value: 7});
-        result = await f1bet.getPlayerBet(account_0);
-        result1 = await f1bet.getPlayerBet(account_1);
-        assert.equal(result.submitted, true, "Result should be submitted.");
-        assert.equal(result1.submitted, true, "Result should not be submitted.");
-        assert.equal(result1.value, 7, "Result value should.");
-        assert.equal(result1.from, account_1, "Result from should be sender address.");
-        for(let i=0; i<20; i++){
-            assert.equal(result1.sBets[i].player, valid_result_arr2[i][0], "TODO");
-            assert.equal(result1.sBets[i].position, valid_result_arr2[i][1], "TODO");
-        }
+        let result1 = await f1bet.getPlayerBets(account_1);
+        expect(
+            result1.map( (a)=>a[0]+a[1] )).to.have.members(
+            valid_result_arr2.map( (a)=>a[0]+a[1] )
+        );
 
     })
 
+
+
     it("Submit solution", async () => {
+        
+        f1bet = await F1Bet.new({ from: account_0 })
+        await f1bet.addPlayer(account_0, "Lukas", { from: account_0 });
+        await f1bet.addPlayer(account_1, "Lisa", { from: account_0 });
+        await f1bet.addPlayer(account_2, "Patrick", { from: account_0 });
+
+        let bet_0 = [
+            ["VER", "2"],   ["PER", "4"],   ["HAM", "1"],   ["RUS", "3"],   ["SAI", "8"],
+            ["LEC", "6"],   ["VET", "DNF"], ["STR", "11"],  ["GAS", "DNF"], ["TSU", "10"],
+            ["ALO", "7"],   ["OCO", "DNF"], ["RIC", "5"],   ["NOR", "9"],   ["BOT", "DNF"],
+            ["ZHO", "DNF"], ["LAT", "13"],  ["ALB", "14"],  ["MSC", "DNF"], ["MZP", "12"]
+        ]
+        let bet_1 = [
+            ["VER", "2"],   ["MSC", "DNF"], ["PER", "4"],   ["HAM", "1"],   ["RUS", "3"],   
+            ["LEC", "8"],   ["VET", "DNF"], ["STR", "11"],  ["GAS", "DNF"], ["TSU", "10"],
+            ["ALO", "7"],   ["OCO", "DNF"], ["RIC", "5"],   ["NOR", "9"],   ["BOT", "DNF"],
+            ["ZHO", "DNF"], ["LAT", "13"],  ["ALB", "14"],  ["MZP", "12"],  ["SAI", "6"],
+        ]
+        let bet_2 = [
+            ["VER", "2"],   ["PER", "DNF"], ["HAM", "1"],   ["RUS", "3"],   ["SAI", "5"],
+            ["LEC", "4"],   ["VET", "11"],  ["STR", "DNF"], ["GAS", "9"],   ["TSU", "7"],
+            ["ALO", "10"],  ["OCO", "12"],  ["RIC", "6"],   ["NOR", "8"],   ["BOT", "14"],
+            ["ZHO", "15"],  ["LAT", "DNF"], ["ALB", "16"],  ["MSC", "13"],  ["MZP", "DNF"]
+        ]
+
+        let solution = [
+            ["VER", "2"],   ["PER", "DNF"], ["HAM", "1"],   ["RUS", "11"],  ["SAI", "6"],
+            ["LEC", "3"],   ["VET", "15"],  ["STR", "8"],   ["GAS", "9"],   ["TSU", "10"],
+            ["ALO", "4"],   ["OCO", "5"],   ["RIC", "7"],   ["NOR", "12"],  ["BOT", "13"],
+            ["ZHO", "14"],  ["LAT", "16"],  ["ALB", "17"],  ["MSC", "DNF"], ["MZP", "DNF"]
+        ]
+
+        await f1bet.placeBet(bet_0, {from: account_0, value: 1});
+        await f1bet.placeBet(bet_1, {from: account_1, value: 4});
+        await f1bet.placeBet(bet_2, {from: account_2, value: 3});
+
+        let players = await f1bet.listPlayers();
+        let payouts = await f1bet.submitSolution(bet_0, {from: account_0});
+        players = await f1bet.listPlayers();
 
     })
 
