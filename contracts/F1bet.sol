@@ -1,26 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
+import './PlayerManagement.sol';
+import './Setup.sol';
 
-contract F1bet {
-    address owner;
-
-    mapping (address => string) addr2player;
-    mapping (string => address) player2addr;
-
-    string _nextRace;
-
-    struct PlayerInfo {
-        bool isRegistered;
-        string name;
-        uint payout;
-    }
-    mapping (address => PlayerInfo) private _playerInfos;
+contract F1bet is PlayerManagement, Setup {
     
-
-    string[20] _drivers = [
-        "VER","PER","HAM","RUS","LEC","SAI","NOR","RIC","VET","STR",
-        "ALO","OCO","GAS","TSU","BOT","ZHO","ALB","LAT","MSC","MZP"];
     mapping (string => string) private _driver2bet;
     mapping (string => string) private _bet2driver;
 
@@ -37,19 +22,6 @@ contract F1bet {
     }
 
     mapping (address => RaceBet) _openRaceBets;
-
-
-    // Define a modifer that checks to see if msg.sender == owner of the contract
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
-
-    // Define a modifer that verifies the Caller
-    modifier verifyCaller (address _address) {
-        require(msg.sender == _address); 
-        _;
-    }
 
     // Define a modifer that verifies the bet to be valid
     modifier validBet (string[2][20] memory sBets) {
@@ -79,61 +51,12 @@ contract F1bet {
         _;
     }
 
-    modifier playerRegistered(){
-        require(isPlayerRegistered(msg.sender) == true, "Players must be registered before placing bets");
-        _;
-    }
-
-
 
     constructor(){
         owner=msg.sender;
         _nextRace="Monaco";
     }
 
-    function compareStrings(string memory a, string memory b) public pure returns (bool) {
-        return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
-    }
-
-    function registerPlayer(address addr, string memory name) onlyOwner() external {
-          addr2player[addr]=name;
-          player2addr[name]=addr;
-
-          //PlayerInfo memory p =  PlayerInfo({ isRegistered: false, name: name, payout: 0});
-          _playerInfos[addr] = PlayerInfo({ isRegistered: true, name: name, payout: 0});
-
-        //   Player memory p = Player({
-        //       addr: addr, name: player, payout: 0
-        //   });
-        //   _players.push(p);
-    }
-
-    // function removePlayer(address addr, string calldata player) onlyOwner public {
-    //       addr2player[addr]="";
-    //       player2addr[player]=address(0);
-
-    //       for(uint i=0; i<_players.length; i++ ){
-    //           if(_players[i].addr==addr && compareStrings(_players[i].name, player) ){
-    //               //proper way of removing elements from array
-    //               _players[i] = _players[_players.length - 1];
-    //               _players.pop();
-    //               break;
-    //           }
-              
-    //       }
-    // }
-
-    // function listPlayers() public view returns (Player[] memory) {
-    //       return _players;
-    // }
-
-    function isPlayerRegistered(address addr) public view returns (bool){
-       return _playerInfos[addr].isRegistered;
-    }
-
-    function getPlayerInfo(address addr) public view returns (PlayerInfo memory){
-        return _playerInfos[addr];
-    }
 
     function setNextRace(string memory nextRace) onlyOwner() public {
         _nextRace = nextRace;
@@ -168,26 +91,6 @@ contract F1bet {
 
     // function evaluateInnerBet(string[] memory bets, string memory sol) private returns (uint){
            
-    // }
-
-
-    // function submitSolution(string[2][20] memory solution) onlyOwner public returns (uint) {
-
-    //     for(uint i=0; i<solution.length; i++){
-    //         string memory sol_driver = solution[i][0];
-    //         string memory sol_pos = solution[i][1];
-            
-    //         for(uint j=0; j<_players.length; j++){
-    //             address player_addr = _players[j].addr;
-    //             string memory bet_pos = _openRaceBets[player_addr].sBets[sol_driver];
-    //             if(compareStrings(sol_pos, bet_pos)){
-    //                 _players[j].payout++;
-
-    //             }
-    //         }
-         
-    //     }
-    //     return 0;
     // }
 
 
