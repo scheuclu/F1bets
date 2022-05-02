@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
 
@@ -9,13 +10,12 @@ contract F1bet {
 
     string _nextRace;
 
-    struct Player {
-        address addr;
+    struct PlayerInfo {
+        bool isRegistered;
         string name;
         uint payout;
     }
-
-    Player[] _players;
+    mapping (address => PlayerInfo) private _playerInfos;
     
 
     string[20] _drivers = [
@@ -79,6 +79,11 @@ contract F1bet {
         _;
     }
 
+    modifier playerRegistered(){
+        require(isPlayerRegistered(msg.sender) == true, "Players must be registered before placing bets");
+        _;
+    }
+
 
 
     constructor(){
@@ -90,33 +95,44 @@ contract F1bet {
         return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
     }
 
-    function addPlayer(address addr, string memory player) onlyOwner() external {
-          addr2player[addr]=player;
-          player2addr[player]=addr;
+    function registerPlayer(address addr, string memory name) onlyOwner() external {
+          addr2player[addr]=name;
+          player2addr[name]=addr;
 
-          Player memory p = Player({
-              addr: addr, name: player, payout: 0
-          });
-          _players.push(p);
+          //PlayerInfo memory p =  PlayerInfo({ isRegistered: false, name: name, payout: 0});
+          _playerInfos[addr] = PlayerInfo({ isRegistered: true, name: name, payout: 0});
+
+        //   Player memory p = Player({
+        //       addr: addr, name: player, payout: 0
+        //   });
+        //   _players.push(p);
     }
 
-    function removePlayer(address addr, string calldata player) onlyOwner public {
-          addr2player[addr]="";
-          player2addr[player]=address(0);
+    // function removePlayer(address addr, string calldata player) onlyOwner public {
+    //       addr2player[addr]="";
+    //       player2addr[player]=address(0);
 
-          for(uint i=0; i<_players.length; i++ ){
-              if(_players[i].addr==addr && compareStrings(_players[i].name, player) ){
-                  //proper way of removing elements from array
-                  _players[i] = _players[_players.length - 1];
-                  _players.pop();
-                  break;
-              }
+    //       for(uint i=0; i<_players.length; i++ ){
+    //           if(_players[i].addr==addr && compareStrings(_players[i].name, player) ){
+    //               //proper way of removing elements from array
+    //               _players[i] = _players[_players.length - 1];
+    //               _players.pop();
+    //               break;
+    //           }
               
-          }
+    //       }
+    // }
+
+    // function listPlayers() public view returns (Player[] memory) {
+    //       return _players;
+    // }
+
+    function isPlayerRegistered(address addr) public view returns (bool){
+       return _playerInfos[addr].isRegistered;
     }
 
-    function listPlayers() public view returns (Player[] memory) {
-          return _players;
+    function getPlayerInfo(address addr) public view returns (PlayerInfo memory){
+        return _playerInfos[addr];
     }
 
     function setNextRace(string memory nextRace) onlyOwner() public {
@@ -127,18 +143,26 @@ contract F1bet {
         return _nextRace;
     }
 
-    function placeBet(string[2][20] memory bets) external payable {
+    function placeBet(string[2][20] memory bets) playerRegistered external payable {
         require(msg.value>0, "Cannot have zero bet");
+        require(bets.length==20, "Must submit a bet for all 20 players");
 
         _openRaceBets[msg.sender].from = msg.sender;
         _openRaceBets[msg.sender].value = msg.value;
         _openRaceBets[msg.sender].submitted = true;
 
-        for(uint i=0; i<bets.length; i++){
-            string memory bet_driver = bets[i][0];
-            string memory bet_position = bets[i][1];
-            _openRaceBets[msg.sender].sBets[bet_driver] = bet_position;
+        // for(uint i=0; i<bets.length; i++){
+        //     string memory bet_driver = bets[i][0];
+        //     string memory bet_position = bets[i][1];
+        //     _openRaceBets[msg.sender].sBets[bet_driver] = bet_position;
+        // }
+
+        for(uint i=0; i<20; i++){
+            _openRaceBets[msg.sender].sBets["VER"] = "1";
         }
+        _openRaceBets[msg.sender].sBets["VER"] = "1";
+
+        //payable(address(owner)).transfer(msg.value);
         
     }
 
@@ -147,45 +171,35 @@ contract F1bet {
     // }
 
 
-    function submitSolution(string[2][20] memory solution) onlyOwner public returns (uint) {
+    // function submitSolution(string[2][20] memory solution) onlyOwner public returns (uint) {
 
-        for(uint i=0; i<solution.length; i++){
-            string memory sol_driver = solution[i][0];
-            string memory sol_pos = solution[i][1];
+    //     for(uint i=0; i<solution.length; i++){
+    //         string memory sol_driver = solution[i][0];
+    //         string memory sol_pos = solution[i][1];
             
-            for(uint j=0; j<_players.length; j++){
-                address player_addr = _players[j].addr;
-                string memory bet_pos = _openRaceBets[player_addr].sBets[sol_driver];
-                if(compareStrings(sol_pos, bet_pos)){
-                    _players[j].payout++;
+    //         for(uint j=0; j<_players.length; j++){
+    //             address player_addr = _players[j].addr;
+    //             string memory bet_pos = _openRaceBets[player_addr].sBets[sol_driver];
+    //             if(compareStrings(sol_pos, bet_pos)){
+    //                 _players[j].payout++;
 
-                }
-            }
+    //             }
+    //         }
          
-        }
-
-        return 0;
-
-        
-    }
+    //     }
+    //     return 0;
+    // }
 
 
-    function getPlayerBets(address addr) public view returns (string[2][20] memory ) {
+    function getPlayerBet(address addr, string calldata driver) public view returns (string memory ) {
 
-            string[2][20] memory result;
-            for(uint i=0; i<20; i++){
-                string memory driver = _drivers[i];
-                result[i][0] = driver;
-                result[i][1] = _openRaceBets[addr].sBets[driver];
-            }
-
-            return result;
+        return _openRaceBets[addr].sBets[driver];
 
     }
 
 
-    function getBalance() public returns (uint) {
-        return address(this).balance;
+    function getBalance() public view returns (uint) {
+        return  address(this).balance;
     }
 
 
