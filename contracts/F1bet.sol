@@ -5,7 +5,9 @@ import './PlayerManagement.sol';
 import './Setup.sol';
 
 contract F1bet is PlayerManagement, Setup {
-    
+    // ╔═══════════╗
+    // ║ Variables ║
+    // ╚═══════════╝
     mapping (string => string) private _driver2bet;
     mapping (string => string) private _bet2driver;
 
@@ -23,6 +25,10 @@ contract F1bet is PlayerManagement, Setup {
 
     mapping (address => RaceBet) _openRaceBets;
 
+
+    // ╔═══════════╗
+    // ║ Modifiers ║
+    // ╚═══════════╝
     // Define a modifer that verifies the bet to be valid
     modifier validBet (string[2][20] memory sBets) {
         uint numDNF=0;
@@ -52,20 +58,9 @@ contract F1bet is PlayerManagement, Setup {
     }
 
 
-    constructor(){
-        owner=msg.sender;
-        _nextRace="Monaco";
-    }
-
-
-    function setNextRace(string memory nextRace) onlyOwner() public {
-        _nextRace = nextRace;
-    }
-
-    function getNextRace() public view returns (string memory) {
-        return _nextRace;
-    }
-
+    // ╔═══════════╗
+    // ║ Functions ║
+    // ╚═══════════╝
     function placeBet(string[2][20] memory bets) playerRegistered external payable {
         require(msg.value>0, "Cannot have zero bet");
         require(bets.length==20, "Must submit a bet for all 20 players");
@@ -89,10 +84,8 @@ contract F1bet is PlayerManagement, Setup {
         
     }
 
-    // function evaluateInnerBet(string[] memory bets, string memory sol) private returns (uint){
-           
+    // function evaluateInnerBet(string[] memory bets, string memory sol) private returns (uint){         
     // }
-
 
     function getPlayerBet(address addr, string calldata driver) public view returns (string memory ) {
 
@@ -100,10 +93,8 @@ contract F1bet is PlayerManagement, Setup {
 
     }
 
-
     function getBalance() public view returns (uint) {
         return  address(this).balance;
     }
-
 
 }

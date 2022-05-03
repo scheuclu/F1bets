@@ -1,10 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.12;
 
+import './Ownable.sol';
 
-contract PlayerManagement {
-    address owner;
 
+contract PlayerManagement is Ownable {
+
+    // ╔═══════════╗
+    // ║ Variables ║
+    // ╚═══════════╝
     mapping (address => string) addr2player;
     mapping (string => address) player2addr;
 
@@ -15,14 +19,13 @@ contract PlayerManagement {
     }
     mapping (address => PlayerInfo) private _playerInfos;
 
+    event PlayerRegistered(address player, string name);
+    event PlayerDeRegistered(address player, string name);
 
-    // Define a modifer that checks to see if msg.sender == owner of the contract
-    modifier onlyOwner() {
-        require(msg.sender == owner);
-        _;
-    }
 
-    // Define a modifer that verifies the Caller
+    // ╔═══════════╗
+    // ║ Modifiers ║
+    // ╚═══════════╝
     modifier verifyCaller (address _address) {
         require(msg.sender == _address); 
         _;
@@ -33,10 +36,10 @@ contract PlayerManagement {
         _;
     }
 
-    constructor(){
-        owner=msg.sender;
-    }
 
+    // ╔═══════════╗
+    // ║ Functions ║
+    // ╚═══════════╝
     function compareStrings(string memory a, string memory b) public pure returns (bool) {
         return (keccak256(abi.encodePacked((a))) == keccak256(abi.encodePacked((b))));
     }
@@ -45,33 +48,16 @@ contract PlayerManagement {
           addr2player[addr]=name;
           player2addr[name]=addr;
 
-          //PlayerInfo memory p =  PlayerInfo({ isRegistered: false, name: name, payout: 0});
           _playerInfos[addr] = PlayerInfo({ isRegistered: true, name: name, payout: 0});
-
-        //   Player memory p = Player({
-        //       addr: addr, name: player, payout: 0
-        //   });
-        //   _players.push(p);
     }
 
-    // function removePlayer(address addr, string calldata player) onlyOwner public {
-    //       addr2player[addr]="";
-    //       player2addr[player]=address(0);
+    function deRegisterPlayer(address addr) public {
+        require(isPlayerRegistered(addr) == true, "Player is not registered");
 
-    //       for(uint i=0; i<_players.length; i++ ){
-    //           if(_players[i].addr==addr && compareStrings(_players[i].name, player) ){
-    //               //proper way of removing elements from array
-    //               _players[i] = _players[_players.length - 1];
-    //               _players.pop();
-    //               break;
-    //           }
-              
-    //       }
-    // }
-
-    // function listPlayers() public view returns (Player[] memory) {
-    //       return _players;
-    // }
+        player2addr[addr2player[addr]]=address(0);
+        addr2player[addr]="";
+        _playerInfos[addr] = PlayerInfo({ isRegistered: false, name: "", payout: 0});
+    }
 
     function isPlayerRegistered(address addr) public view returns (bool){
        return _playerInfos[addr].isRegistered;

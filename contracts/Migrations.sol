@@ -2,15 +2,24 @@
 pragma solidity ^0.8.12;
 
 contract Migrations {
+    // ╔═══════════╗
+    // ║ Variables ║
+    // ╚═══════════╝
   address public owner;
   uint public last_completed_migration;
 
-  constructor() {
-    owner = msg.sender;
-  }
-
+    // ╔═══════════╗
+    // ║ Modifiers ║
+    // ╚═══════════╝
   modifier restricted() {
     if (msg.sender == owner) _;
+  }
+
+    // ╔═══════════╗
+    // ║ Functions ║
+    // ╚═══════════╝
+  constructor() {
+    owner = msg.sender;
   }
 
   function setCompleted(uint completed) public restricted {

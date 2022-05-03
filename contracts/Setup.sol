@@ -2,15 +2,34 @@
 pragma solidity ^0.8.12;
 
 
-contract Setup {
+import './Ownable.sol';
 
+
+contract Setup is Ownable {
+
+    // ╔═══════════╗
+    // ║ Variables ║
+    // ╚═══════════╝
     string _nextRace;
-
 
     string[20] _drivers = [
         "VER","PER","HAM","RUS","LEC","SAI","NOR","RIC","VET","STR",
         "ALO","OCO","GAS","TSU","BOT","ZHO","ALB","LAT","MSC","MZP"];
 
+    // ╔═══════════╗
+    // ║ Functions ║
+    // ╚═══════════╝
+    constructor(){
+        _nextRace="Monaco";
+    }
+
+    function setNextRace(string memory nextRace) onlyOwner public {
+        _nextRace = nextRace;
+    }
+
+    function getNextRace() public view returns (string memory) {
+        return _nextRace;
+    }
 
     // function submitSolution(string[2][20] memory solution) onlyOwner public returns (uint) {
 
