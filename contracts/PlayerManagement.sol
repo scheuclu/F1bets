@@ -19,8 +19,8 @@ contract PlayerManagement is Ownable {
     }
     mapping (address => PlayerInfo) private _playerInfos;
 
-    event PlayerRegistered(address player, string name);
-    event PlayerDeRegistered(address player, string name);
+    event PlayerRegistered(address addr, string name);
+    event PlayerDeRegistered(address addr);
 
 
     // ╔═══════════╗
@@ -45,10 +45,11 @@ contract PlayerManagement is Ownable {
     }
 
     function registerPlayer(address addr, string memory name) onlyOwner() external {
-          addr2player[addr]=name;
-          player2addr[name]=addr;
+        addr2player[addr]=name;
+        player2addr[name]=addr;
 
-          _playerInfos[addr] = PlayerInfo({ isRegistered: true, name: name, payout: 0});
+        _playerInfos[addr] = PlayerInfo({ isRegistered: true, name: name, payout: 0});
+        emit PlayerRegistered(addr, name);
     }
 
     function deRegisterPlayer(address addr) public {
@@ -57,6 +58,7 @@ contract PlayerManagement is Ownable {
         player2addr[addr2player[addr]]=address(0);
         addr2player[addr]="";
         _playerInfos[addr] = PlayerInfo({ isRegistered: false, name: "", payout: 0});
+        emit PlayerDeRegistered(addr);
     }
 
     function isPlayerRegistered(address addr) public view returns (bool){
